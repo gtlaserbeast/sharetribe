@@ -20,4 +20,8 @@ module PaypalHelper
     PaypalHelper.personal_account_prepared?(user, community) &&
       PaypalHelper.community_ready_for_payments?(community)
   end
+
+  def missing_payment_info?(user, community)
+    community.paypal_enabled && user.listings.present? && !user_and_community_ready_for_payments?(user, community)
+  end
 end
